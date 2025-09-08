@@ -25,7 +25,7 @@ Before you start, ensure you have the following installed:
 
 ### Installation
  Clone this repository:
-1. git clone https://github.com/your-username/municipal-services-app.git
+1. git clone https://github.com/nyanem/ST10026525.PROG3B.POE
 2. Open the solution file in Visual Studio (MunicipalServices.sln).
 3. Restore NuGet packages:
    - Right-click the solution → Restore NuGet Packages.
