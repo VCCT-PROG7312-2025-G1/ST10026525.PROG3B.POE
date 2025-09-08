@@ -1,6 +1,6 @@
 # Municipal Services Web App
 
-### A web application built using ASP.NET MVC for managing and accessing municipal services. This application allows residents to submit service requests, report issues, view announcements, and track the status of their requests.
+A web application built using ASP.NET MVC for managing and accessing municipal services. This application allows residents to submit service requests, report issues, view announcements, and track the status of their requests.
 
 ## Table of Contents
 1. Features
