@@ -1,5 +1,52 @@
-﻿
+﻿@model ST10026525.PROG3B.POE.Models.Report
+@{
+    ViewData["Title"] = "Report Issues";
+}
 
-<p>Testing.</p>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Report an Issue</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success text-center">
+            @TempData["Success"]
+        </div>
+    }
+
+    <form asp-action="ReportForm" enctype="multipart/form-data" method="post" class="p-4 shadow rounded bg-light">
+        <div class="mb-3">
+            <label asp-for="Location" class="form-label fw-bold"></label>
+            <input asp-for="Location" class="form-control" />
+            <span asp-validation-for="Location" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Category" class="form-label fw-bold"></label>
+            <select asp-for="Category" class="form-select" asp-items="@(new SelectList(ViewBag.Categories))">
+                <option value="">-- Select Category --</option>
+            </select>
+            <span asp-validation-for="Category" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label fw-bold"></label>
+            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="MediaFileName" class="form-label fw-bold"></label>
+            <input asp-for="MediaFileName" class="form-control" type="file" />
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">Submit</button>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary w-100 mt-2">Back to Home</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
 
 
