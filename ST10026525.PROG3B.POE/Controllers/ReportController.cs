@@ -8,7 +8,7 @@ namespace ST10026525.PROG3B.POE.Controllers
         [HttpGet]
         public IActionResult ReportForm()
         {
-            ViewBag.Categories = new List<string> { "Sanitation", "Roads", "Utilities", "Other" };
+            ViewBag.Categories = new List<string> { "Sanitation", "Roads", "Utilities", "Electricity", "Other" };
             return View();
         }
         
@@ -17,16 +17,24 @@ namespace ST10026525.PROG3B.POE.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Handle media upload (optional)
                 if (Media != null && Media.Length > 0)
                 {
-                    var filePath = Path.Combine("wwwroot/uploads", Media.FileName);
+                    var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+                    if (!Directory.Exists(uploadsPath))
+                        Directory.CreateDirectory(uploadsPath);
+
+                    var fileName = Path.GetFileName(Media.FileName);
+                    var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(fileName);
+                    var filePath = Path.Combine(uploadsPath, uniqueFileName);
+
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         Media.CopyTo(stream);
                     }
-                    model.MediaFileName = Media.FileName;
+
+                    model.MediaFileName = uniqueFileName; // store unique file name
                 }
+
                 // Save to list
                 ReportRepository.AddReport(model);
 
@@ -34,7 +42,7 @@ namespace ST10026525.PROG3B.POE.Controllers
                 return RedirectToAction("ReportForm");
             }
 
-            ViewBag.Categories = new List<string> { "Sanitation", "Roads", "Utilities", "Other" };
+            ViewBag.Categories = new List<string> { "Sanitation", "Roads", "Utilities", "Electricity", "Other" };
             return View(model);
         }
         [HttpGet]

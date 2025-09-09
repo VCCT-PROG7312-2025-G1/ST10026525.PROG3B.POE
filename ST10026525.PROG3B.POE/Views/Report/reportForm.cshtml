@@ -1,11 +1,13 @@
 ﻿@model ST10026525.PROG3B.POE.Models.Report
 @{
     ViewData["Title"] = "Report Issues";
+    ViewData["BodyClass"] = "form-page";
 }
 
-<div class="container mt-5">
-    <h2 class="text-center mb-4">Report an Issue</h2>
+<div class="container form-page-container">
+    <h2 class="text-center mb-4">Report an Issue or Request a service</h2>
 
+    <!-- Success message -->
     @if (TempData["Success"] != null)
     {
         <div class="alert alert-success text-center">
@@ -13,16 +15,16 @@
         </div>
     }
 
-    <form asp-action="ReportForm" enctype="multipart/form-data" method="post" class="p-4 shadow rounded bg-light">
+    <form asp-action="ReportForm" enctype="multipart/form-data" method="post" class="form-card">
         <div class="mb-3">
             <label asp-for="Location" class="form-label fw-bold"></label>
-            <input asp-for="Location" class="form-control" />
+            <input asp-for="Location" id="location" class="form-control" />
             <span asp-validation-for="Location" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
             <label asp-for="Category" class="form-label fw-bold"></label>
-            <select asp-for="Category" class="form-select" asp-items="@(new SelectList(ViewBag.Categories))">
+            <select asp-for="Category" id="category" class="form-select" asp-items="@(new SelectList(ViewBag.Categories))">
                 <option value="">-- Select Category --</option>
             </select>
             <span asp-validation-for="Category" class="text-danger"></span>
@@ -30,23 +32,91 @@
 
         <div class="mb-3">
             <label asp-for="Description" class="form-label fw-bold"></label>
-            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+            <textarea asp-for="Description" id="description" class="form-control" rows="4"></textarea>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
             <label asp-for="MediaFileName" class="form-label fw-bold"></label>
-            <input asp-for="MediaFileName" class="form-control" type="file" />
+            <input asp-for="MediaFileName" id="media" class="form-control" type="file" />
+        </div>
+
+         <!--User Engagement Strategy:  Progress bar -->
+        <div class="mb-3">
+            <div class="progress">
+                <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%;">0%</div>
+            </div>
+            <small id="motivation" class="text-muted">Let's get started!</small>
         </div>
 
         <button type="submit" class="btn btn-success w-100">Submit</button>
-        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary w-100 mt-2">Back to Home</a>
+        <a asp-controller="Report" asp-action="ViewReports" class="btn btn-gold w-100 mt-2">View your Reports</a>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary w-100 mt-2">Back to Home</a>  
     </form>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const fields = [
+                { sel: '#location', event: 'input', isFile: false },
+                { sel: '#category', event: 'change', isFile: false },
+                { sel: '#description', event: 'input', isFile: false },
+                { sel: '#media', event: 'change', isFile: true } // file input
+            ];
+
+            const progressBar = document.getElementById('progressBar');
+            const motivation = document.getElementById('motivation');
+
+            if (!progressBar || !motivation) {
+                console.warn('Progress bar or motivation element missing.');
+                return;
+            }
+
+            function isFilled(el, isFile) {
+                if (!el) return false;
+                if (isFile) {
+                    return el.files && el.files.length > 0;
+                }
+                // some selects have value "" for the placeholder
+                return (el.value || '').toString().trim() !== '';
+            }
+
+            function updateProgress() {
+                const total = fields.length;
+                let filled = 0;
+                fields.forEach(f => {
+                    const el = document.querySelector(f.sel);
+                    if (isFilled(el, f.isFile)) filled++;
+                });
+
+                const percent = Math.round((filled / total) * 100);
+                progressBar.style.width = percent + '%';
+                progressBar.innerText = percent + '%';
+                progressBar.setAttribute('aria-valuenow', percent);
+
+                if (percent === 0) motivation.innerText = "Let's get started!";
+                else if (percent < 50) motivation.innerText = "Great start, keep going!";
+                else if (percent < 100) motivation.innerText = "Almost there!";
+                else motivation.innerText = "Ready to submit!";
+            }
+
+            // Attach listeners (with null checks)
+            fields.forEach(f => {
+                const el = document.querySelector(f.sel);
+                if (!el) {
+                    console.warn('Missing element for selector', f.sel);
+                    return;
+                }
+                el.addEventListener(f.event, updateProgress);
+                // also listen to input for selects/files just in case
+                if (f.event === 'change') el.addEventListener('input', updateProgress);
+            });
+
+            // initial call to pick up prefilled values (if any)
+            updateProgress();
+        });
+    </script>
 }
-
-
 

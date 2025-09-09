@@ -1,7 +1,7 @@
 /* General reset */
 html, body {
     margin: 0;
-    padding: 0;
+    padding: 0px;
     height: 100%;
     font-family: 'Segoe UI', Arial, sans-serif;
 }
@@ -22,6 +22,7 @@ html, body {
     z-index: 1000;
     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
+
 
     .navbar.scrolled {
         background-color: #004d25; /* solid green on scroll */
@@ -185,13 +186,258 @@ html, body {
         text-shadow: 0 1px 8px rgba(0,0,0,0.35);
     }
 .btn-gold {
-    background-color: #FFD700; /* gold */
+    background-color: #D3AF37; /* gold */
     color: #000; /* black text */
     font-weight: 600;
     border: none;
 }
 
     .btn-gold:hover {
-        background-color: #e6c200; /* darker gold on hover */
+        background-color: #B9982D; /* darker gold on hover */
         color: #000;
     }
+.form-page-container {
+    max-width: 650px;
+    margin: 120px auto 50px; /* center with top spacing for navbar */
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.85); /* slightly translucent for readability */
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 1; /* above overlay */
+}
+   
+/* Card-like form styling */
+.form-card {
+    background: rgba(0, 77, 37, 0.05); /* light greenish overlay */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    backdrop-filter: blur(8px); /* subtle glass effect */
+    border: 1px solid rgba(0, 77, 37, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.85); /* slightly translucent white */
+}
+    .form-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+    }
+    /* Form headings */
+    .form-card h2 {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        color: #004d25;
+        margin-bottom: 25px;
+        text-align: center;
+    }
+
+    /* Labels and inputs */
+    .form-card label {
+        font-weight: 600;
+        color: #004d25;
+    }
+
+    .form-card input,
+    .form-card select,
+    .form-card textarea {
+        border: 1px solid #004d25;
+        border-radius: 6px;
+        padding: 10px 12px;
+        font-size: 1rem;
+        width: 100%;
+        margin-top: 6px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .form-card input:focus,
+        .form-card select:focus,
+        .form-card textarea:focus {
+            outline: none;
+            border-color: #ffd700; /* gold accent */
+            box-shadow: 0 0 6px rgba(255, 215, 0, 0.4);
+        }
+
+    /* Buttons */
+    .form-card button[type="submit"] {
+        background-color: #004d25;
+        color: #fff;
+        font-weight: 600;
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        width: 100%;
+        margin-top: 15px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+        .form-card button[type="submit"]:hover {
+            background-color: #00331a;
+            transform: translateY(-2px);
+        }
+
+    /* Secondary buttons */
+    .form-card a.btn {
+        margin-top: 10px;
+    }
+
+    /* Progress bar */
+    .form-card .progress {
+        height: 20px;
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: rgba(0,0,0,0.1);
+        margin-top: 10px;
+    }
+
+    .form-card .progress-bar {
+        background-color: #004d25;
+        transition: width 0.3s ease;
+    }
+
+/* Motivation text */
+#motivation {
+    font-style: italic;
+    color: #004d25;
+    margin-top: 5px;
+    display: block;
+    text-align: center;
+}
+/* Full page background */
+body.form-page {
+    background-image: url('/images/main1.jpg');
+    background-size: cover; /* cover the entire page */
+    background-position: center; /* center the image */
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* keeps image fixed when scrolling */
+    min-height: 100vh; /* full viewport height */
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+    /* Optional overlay for readability */
+    body.form-page::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 77, 37, 0.5); /* semi-transparent green overlay */
+        z-index: 0;
+    }
+/* Full-page background (reuse same as form page) */
+body.reports-page {
+    background-image: url('/images/main1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+    /* Optional overlay for readability */
+    body.reports-page::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 77, 37, 0.5); /* semi-transparent green overlay */
+        z-index: 0;
+    }
+
+/* Container for the table and header */
+.form-page-container {
+    max-width: 900px;
+    margin: 120px auto 50px; /* spacing below navbar */
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.85); /* translucent white */
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 1;
+}
+
+    /* Page heading */
+    .form-page-container h2 {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        color: #004d25;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+/* Table styling */
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px; /* spacing between rows */
+}
+
+    .table thead tr {
+        background-color: #004d25;
+        color: #fff;
+        font-weight: 600;
+    }
+
+    .table thead th {
+        border: none;
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    .table tbody tr {
+        background-color: rgba(0,77,37,0.1);
+        border-radius: 8px;
+    }
+
+    .table tbody td {
+        padding: 12px 15px;
+        vertical-align: middle;
+    }
+
+    .table tbody tr:nth-child(even) {
+        background-color: rgba(0,77,37,0.05);
+    }
+
+    /* Media link styling */
+    .table a {
+        color: #D3AF37;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+        .table a:hover {
+            color: #B9982D; /* darker gold on hover */
+            text-decoration: underline;
+        }
+
+/* Button */
+.btn-gold {
+    background-color: #D3AF37;
+    color: #000;
+    font-weight: 600;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: block;
+    text-align: center;
+}
+
+    .btn-gold:hover {
+        background-color: #B9982D; /* darker gold hover */
+        color: #000;
+        transform: translateY(-2px);
+    }
+
+/* Message for no reports */
+.form-page-container p {
+    font-style: italic;
+    color: #004d25;
+    text-align: center;
+}
