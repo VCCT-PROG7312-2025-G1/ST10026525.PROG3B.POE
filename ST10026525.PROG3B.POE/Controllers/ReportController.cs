@@ -1,42 +1,62 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ST10026525.PROG3B.POE.Models;
+using ST10026525.PROG3B.POE.Data;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace ST10026525.PROG3B.POE.Controllers
 {
     public class ReportController : Controller
     {
-        // Static repository for demo purposes
-        private static ReportRepository _repository = new ReportRepository();
-
+        // GET: Show form
         public IActionResult ReportForm()
         {
-            ViewBag.Categories = new string[] { "Sanitation", "Roads", "Utilities", "Electrivity", "Other" };
+            ViewBag.Categories = new List<string>
+    {
+        "Sanitation",
+        "Roads",
+        "Utilities",
+        "Electricity",
+        "Other"
+    };
+
             return View();
         }
 
+        // POST: Submit report
         [HttpPost]
-        public IActionResult ReportForm(Report model)
+        [ValidateAntiForgeryToken]
+        public IActionResult ReportForm(IFormFile Media, Report model)
         {
-            ViewBag.Categories = new string[] { "Sanitation", "Roads", "Utilities", "Electrivity", "Other" };
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return View(model);
+
+            // Handle media upload
+            if (Media != null && Media.Length > 0)
             {
-                _repository.Add(model);
-                TempData["Success"] = "Report submitted successfully!";
-                return RedirectToAction("ReportForm");
+                var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+                if (!Directory.Exists(uploadsPath))
+                    Directory.CreateDirectory(uploadsPath);
+
+                var filePath = Path.Combine(uploadsPath, Media.FileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    Media.CopyTo(stream);
+                }
+                model.MediaFileName = Media.FileName;
             }
-            return View(model);
+
+            // Add report to queue
+            ReportRepository.AddReport(model);
+
+            TempData["Success"] = "Report submitted successfully!";
+            return RedirectToAction("ReportForm");
         }
 
-        public IActionResult ViewReports(string searchLocation = "", string searchCategory = "")
+        // GET: View all reports
+        public IActionResult ViewReports()
         {
-            IEnumerable<Report> reports = _repository.GetAll();
-
-            if (!string.IsNullOrEmpty(searchLocation))
-                reports = _repository.SearchByLocation(searchLocation);
-
-            if (!string.IsNullOrEmpty(searchCategory))
-                reports = _repository.SearchByCategory(searchCategory);
-
+            var reports = ReportRepository.GetAllReports();
             return View(reports);
         }
     }
