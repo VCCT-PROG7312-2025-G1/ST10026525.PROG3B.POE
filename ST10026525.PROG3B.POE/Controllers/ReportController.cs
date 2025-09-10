@@ -10,14 +10,14 @@ namespace ST10026525.PROG3B.POE.Controllers
 
         public IActionResult ReportForm()
         {
-            ViewBag.Categories = new string[] { "Water", "Electricity", "Roads", "Sanitation" };
+            ViewBag.Categories = new string[] { "Sanitation", "Roads", "Utilities", "Electrivity", "Other" };
             return View();
         }
 
         [HttpPost]
         public IActionResult ReportForm(Report model)
         {
-            ViewBag.Categories = new string[] { "Water", "Electricity", "Roads", "Sanitation" };
+            ViewBag.Categories = new string[] { "Sanitation", "Roads", "Utilities", "Electrivity", "Other" };
             if (ModelState.IsValid)
             {
                 _repository.Add(model);
