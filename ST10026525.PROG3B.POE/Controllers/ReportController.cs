@@ -5,50 +5,38 @@ namespace ST10026525.PROG3B.POE.Controllers
 {
     public class ReportController : Controller
     {
-        [HttpGet]
+        // Static repository for demo purposes
+        private static ReportRepository _repository = new ReportRepository();
+
         public IActionResult ReportForm()
         {
-            ViewBag.Categories = new List<string> { "Sanitation", "Roads", "Utilities", "Electricity", "Other" };
+            ViewBag.Categories = new string[] { "Water", "Electricity", "Roads", "Sanitation" };
             return View();
         }
-        
+
         [HttpPost]
-        public IActionResult ReportForm(Report model, IFormFile? Media)
+        public IActionResult ReportForm(Report model)
         {
+            ViewBag.Categories = new string[] { "Water", "Electricity", "Roads", "Sanitation" };
             if (ModelState.IsValid)
             {
-                if (Media != null && Media.Length > 0)
-                {
-                    var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
-                    if (!Directory.Exists(uploadsPath))
-                        Directory.CreateDirectory(uploadsPath);
-
-                    var fileName = Path.GetFileName(Media.FileName);
-                    var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(fileName);
-                    var filePath = Path.Combine(uploadsPath, uniqueFileName);
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        Media.CopyTo(stream);
-                    }
-
-                    model.MediaFileName = uniqueFileName; // store unique file name
-                }
-
-                // Save to list
-                ReportRepository.AddReport(model);
-
-                TempData["Success"] = "Your report has been submitted!";
+                _repository.Add(model);
+                TempData["Success"] = "Report submitted successfully!";
                 return RedirectToAction("ReportForm");
             }
-
-            ViewBag.Categories = new List<string> { "Sanitation", "Roads", "Utilities", "Electricity", "Other" };
             return View(model);
         }
-        [HttpGet]
-        public IActionResult ViewReports()
+
+        public IActionResult ViewReports(string searchLocation = "", string searchCategory = "")
         {
-            var reports = ReportRepository.GetAllReports();
+            IEnumerable<Report> reports = _repository.GetAll();
+
+            if (!string.IsNullOrEmpty(searchLocation))
+                reports = _repository.SearchByLocation(searchLocation);
+
+            if (!string.IsNullOrEmpty(searchCategory))
+                reports = _repository.SearchByCategory(searchCategory);
+
             return View(reports);
         }
     }
