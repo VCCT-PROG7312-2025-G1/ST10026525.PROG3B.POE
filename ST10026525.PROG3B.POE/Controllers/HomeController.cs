@@ -18,7 +18,11 @@ namespace ST10026525.PROG3B.POE.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult About()
+        {
+            return View();
+        }
+        public IActionResult Contact()
         {
             return View();
         }

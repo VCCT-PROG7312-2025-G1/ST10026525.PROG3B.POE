@@ -528,3 +528,37 @@ body.menu-page {
         font-weight: 400;
         color: #004d25;
     }
+.page-container {
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    margin: 120px auto 50px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.page-title {
+    color: #004d25;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.contact-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+    .contact-list li {
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+    }
+
+.contact-form .btn-gold {
+    background-color: #D3AF37;
+    border: none;
+    color: #000;
+}
+
+    .contact-form .btn-gold:hover {
+        background-color: #b9962f;
+    }
