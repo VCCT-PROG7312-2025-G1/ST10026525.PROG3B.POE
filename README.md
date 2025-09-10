@@ -1,47 +1,66 @@
-# Municipal Services Web App
+# Municipal Services Web Application
 
-A web application built using ASP.NET MVC for managing and accessing municipal services. This application allows residents to submit service requests, report issues, view announcements, and track the status of their requests.
+## Overview
+This web application allows citizens to interact with municipal services online. It is built using **ASP.NET MVC** and provides a simple, modern interface for reporting municipal issues, checking service request statuses, and viewing local events and announcements.
 
-## Table of Contents
-1. Features
-2. Prerequisites
-3. Installation
-4. Running the Application
-5. Usage
+The main goal of this application is to provide a **user-friendly platform for municipal engagement**, allowing citizens to submit reports and track their requests digitally.
 
+---
 
-### Features
-- Submit service requests and report municipal issues.
-- View local events and announcements.
-- Track status of submitted requests.
-- User-friendly and responsive interface.
-- Admin dashboard for managing requests and announcements.
+## Features
 
-### Prerequisites
-Before you start, ensure you have the following installed:
-- **Visual Studio 2019/2022** (Community or higher) with **ASP.NET** 
-- **.NET Framework 4.7.2+** (or your project’s target version).
-- Internet browser (Chrome, Edge, Firefox).
+- **Report Issues**
+  - Submit reports about municipal problems or service requests.
+  - Optionally upload media files (images) to support the report.
+  - Visual progress bar that updates as form fields are completed.
+  
+- **Service Request Status** (Coming Soon)
+  - View the progress and status of previously submitted requests.
 
-### Installation
- Clone this repository:
-1. git clone https://github.com/nyanem/ST10026525.PROG3B.POE
-2. Open the solution file in Visual Studio (MunicipalServices.sln).
-3. Restore NuGet packages:
-   - Right-click the solution → Restore NuGet Packages.
-4. Build the solution:
-   - Press Ctrl + Shift + B or go to Build → Build Solution.
+- **Local Events and Announcements** (Coming Soon)
+  - Stay informed about local community events and municipal announcements.
 
-### Running the Application
-1. Set the **Startup Project**:
- - Right-click on the project → **Set as Startup Project.**
-2. Run the application:
- - Press F5 (Debug) or Ctrl + F5 (Run without debugging).
-The default browser will open and navigate to https://localhost:5001 (or another port configured in your project).
+---
 
-### Usage
-1. **Main Menu:** Navigate to key areas like “Report Issues”, “Service Requests”, and “Announcements”.
-2. **Report Issues:** Fill out the form to submit issues to the municipality.
-3. **Local Events and Announcements:** Coming Soon!
-4. **Service Request Status:** Coming Soon!
-*The application uses in-memory data structures (lists, queues, stacks) instead of a database to store data temporarily.*
+## Technology Stack
+
+- **Backend:** ASP.NET MVC (C#)
+- **Frontend:** Razor Pages, Bootstrap 5, custom CSS
+- **Database:** [Your database here, e.g., SQL Server / LocalDB]
+- **Media Handling:** File uploads saved to `wwwroot/uploads`
+- **Version Control:** GitHub
+
+---
+
+## UI / Design
+
+- Modern, responsive interface using **cards, progress bars, and styled forms**.
+- **Green and gold theme** consistent across the application.
+- Interactive menu page with icons and descriptions for each service option.
+
+---
+
+## How It Works
+
+1. On startup, users are presented with a **Main Menu page** with three options:  
+   - Report Issues  
+   - Local Events & Announcements (Coming Soon)  
+   - Service Request Status (Coming Soon)
+2. Users can submit reports via a form that includes **location, category, description, and media upload**.
+3. Reports are stored in the backend, and uploaded media is saved to the `wwwroot/uploads` folder.
+4. Progress bars and notifications give the user visual feedback during form submission.
+
+---
+
+## Screenshots
+
+*(Optional: add screenshots of the form, menu page, and reports page here)*
+
+---
+
+## Future Enhancements
+
+- Fully implement the **Service Request Status** feature.
+- Add **Local Events and Announcements** section.
+- Enhance reporting with **email notifications** or dashboard analytics.
+
