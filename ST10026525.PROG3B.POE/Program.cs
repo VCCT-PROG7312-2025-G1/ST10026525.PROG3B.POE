@@ -30,7 +30,7 @@ namespace ST10026525.PROG3B.POE
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Menu}/{action=MainMenu}/{id?}");
 
             app.Run();
         }
