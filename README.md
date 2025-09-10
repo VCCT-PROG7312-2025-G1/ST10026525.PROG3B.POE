@@ -34,6 +34,7 @@ The main goal of this application is to provide a **user-friendly platform for m
 
 ## UI / Design
 
+- Inspired by a local South African municpality - City of Tswhane. We've used their color scheme as well as their logo's for this project. 
 - Modern, responsive interface using **cards, progress bars, and styled forms**.
 - **Green and gold theme** consistent across the application.
 - Interactive menu page with icons and descriptions for each service option.
@@ -54,9 +55,14 @@ The main goal of this application is to provide a **user-friendly platform for m
 
 ## Screenshots
 
-*(Optional: add screenshots of the form, menu page, and reports page here)*
 
----
+<img width="1452" height="756" alt="Screenshot 2025-09-10 at 03 34 06" src="https://github.com/user-attachments/assets/6c8c5901-d286-4a2f-8b0a-ce00eedb19b8" />
+
+<img width="1455" height="786" alt="Screenshot 2025-09-10 at 03 34 22" src="https://github.com/user-attachments/assets/90229afe-92f1-4b21-a315-00d8325bbbbd" />
+
+---<img width="1461" height="295" alt="Screenshot 2025-09-10 at 03 34 33" src="https://github.com/user-attachments/assets/5f7f7f12-3d9d-4cb1-9f3e-55d015a1f39a" />
+
+<img width="1450" height="763" alt="Screenshot 2025-09-10 at 03 34 42" src="https://github.com/user-attachments/assets/3106937a-5cec-46c0-bd04-954ae108821f" />
 
 ## Future Enhancements
 
