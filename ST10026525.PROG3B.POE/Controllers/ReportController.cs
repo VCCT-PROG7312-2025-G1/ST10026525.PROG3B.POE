@@ -8,45 +8,49 @@ namespace ST10026525.PROG3B.POE.Controllers
 {
     public class ReportController : Controller
     {
+        private List<string> GetCategories() => new List<string>
+        {
+            "Sanitation",
+            "Roads",
+            "Utilities",
+            "Electricity",
+            "Other"
+        };
+
         // GET: Show form
         public IActionResult ReportForm()
         {
-            ViewBag.Categories = new List<string>
-    {
-        "Sanitation",
-        "Roads",
-        "Utilities",
-        "Electricity",
-        "Other"
-    };
-
+            ViewBag.Categories = GetCategories();
             return View();
         }
 
         // POST: Submit report
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ReportForm(IFormFile Media, Report model)
+        public IActionResult ReportForm(IFormFile MediaFileName, Report model)
         {
             if (!ModelState.IsValid)
+            {
+                ViewBag.Categories = GetCategories(); // ✅ repopulate
                 return View(model);
+            }
 
-            // Handle media upload
-            if (Media != null && Media.Length > 0)
+            // ✅ Handle media upload
+            if (MediaFileName != null && MediaFileName.Length > 0)
             {
                 var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
                 if (!Directory.Exists(uploadsPath))
                     Directory.CreateDirectory(uploadsPath);
 
-                var filePath = Path.Combine(uploadsPath, Media.FileName);
+                var filePath = Path.Combine(uploadsPath, MediaFileName.FileName);
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
-                    Media.CopyTo(stream);
+                    MediaFileName.CopyTo(stream);
                 }
-                model.MediaFileName = Media.FileName;
+                model.MediaFileName = MediaFileName.FileName;
             }
 
-            // Add report to queue
+            // Save report
             ReportRepository.AddReport(model);
 
             TempData["Success"] = "Report submitted successfully!";

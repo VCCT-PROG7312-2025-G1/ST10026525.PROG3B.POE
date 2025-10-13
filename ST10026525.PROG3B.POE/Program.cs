@@ -10,6 +10,7 @@ namespace ST10026525.PROG3B.POE
             builder.Services.AddControllersWithViews()
             .AddDataAnnotationsLocalization()
             .AddViewLocalization();
+            builder.Services.AddSession();
 
             var app = builder.Build();
 
@@ -25,7 +26,7 @@ namespace ST10026525.PROG3B.POE
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthorization();
 
             app.MapControllerRoute(
