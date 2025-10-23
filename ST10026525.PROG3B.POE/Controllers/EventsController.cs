@@ -8,9 +8,10 @@ namespace ST10026525.PROG3B.POE.Controllers
     public class EventsController : Controller
     {
         private readonly AppDbContext _context;
-        private static readonly UserSearchTracker _searchTracker;
+        private static UserSearchTracker _searchTracker = new UserSearchTracker();
 
-        public EventsController(AppDbContext context, UserSearchTracker searchTracker)
+
+        public EventsController(AppDbContext context)
         {
             _context = context;
         }

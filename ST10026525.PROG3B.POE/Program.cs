@@ -13,7 +13,9 @@ namespace ST10026525.PROG3B.POE
             builder.Services.AddControllersWithViews()
             .AddDataAnnotationsLocalization()
             .AddViewLocalization();
-          
+
+            builder.Services.AddSingleton<UserSearchTracker>();
+
 
             builder.Services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("EventsDB")));
