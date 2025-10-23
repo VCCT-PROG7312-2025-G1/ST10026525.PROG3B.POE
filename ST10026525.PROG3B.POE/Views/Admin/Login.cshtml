@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Admin Login";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin.css" />
+}
+
+<div class="admin-wrapper">
+
+<h2 class="text-center">Administrator Login</h2>
+
+<form method="post" class="col-md-4 mx-auto">
+    <div class="mb-3">
+        <label>Username</label>
+        <input type="text" name="username" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label>Password</label>
+        <input type="password" name="password" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-warning w-100">Login</button>
+    @if (ViewBag.Error != null)
+    {
+        <div class="text-danger mt-2">@ViewBag.Error</div>
+    }
+</form>
+</div>

@@ -1,3 +1,28 @@
+/* SITE-WIDE BACKGROUND IMAGE */
+.site-bg {
+    background-image: url('/images/main1.jpg'); /* your JPEG image */
+    background-size: cover; /* cover full viewport */
+    background-position: center; /* center the image */
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* optional: keeps image fixed when scrolling */
+    min-height: 100vh; /* ensure it fills full viewport */
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+    /* Optional overlay for readability of text/content */
+    .site-bg::before {
+        content: '';
+        position: fixed; /* fixed ensures overlay covers viewport even on scroll */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.25); /* semi-transparent dark overlay */
+        z-index: -1; /* behind all content */
+    }
+
 /* General reset */
 html, body {
     margin: 0;
@@ -60,14 +85,18 @@ html, body {
         color: #9b59b6; /* yellow accent */
     }
 
+
+
 /* HERO SECTION */
 .hero-section {
-    background: url('/images/main1.jpg') no-repeat center center/cover;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
     position: relative;
     color: white;
     font-family: 'Montserrat', sans-serif;
     letter-spacing: 1.5px;
+    text-align: center;
 }
 
 .hero-text {
@@ -306,13 +335,13 @@ html, body {
 }
 /* Full page background */
 body.form-page {
-    background-image: url('/images/main1.jpg');
+
     background-size: cover; /* cover the entire page */
     background-position: center; /* center the image */
     background-repeat: no-repeat;
     background-attachment: fixed; /* keeps image fixed when scrolling */
     min-height: 100vh; /* full viewport height */
-    font-family: 'Segoe UI', Arial, sans-serif;
+    font-family: 'Segoe UI', Montserrat, sans-serif;
 }
 
     /* Optional overlay for readability */

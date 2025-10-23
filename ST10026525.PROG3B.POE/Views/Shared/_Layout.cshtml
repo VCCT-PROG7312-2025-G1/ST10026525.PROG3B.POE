@@ -4,15 +4,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - City of Tshwane</title>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ST1002652.PROG7312.POE.styles.css" asp-append-version="true" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Page-specific styles -->
+    @RenderSection("Styles", required: false)
 </head>
-<body>
+
+<body class="site-bg @ViewData["BodyClass"]">
+
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
-     
         <a class="navbar-brand" href="#">
             <img src="~/images/logoC.png" alt="Logo" class="navbar-logo">
         </a>
@@ -23,35 +30,36 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    <a class="nav-link text-white" asp-controller="Home" asp-action="Index">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="About">About Us</a>
+                    <a class="nav-link text-white" asp-controller="Home" asp-action="About">About Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Contact">Contact Us</a>
+                    <a class="nav-link text-white" asp-controller="Home" asp-action="Contact">Contact Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-gold ms-3" asp-area="" asp-controller="Report" asp-action="ReportForm">Report & Request</a>
+                    <a class="nav-link text-white" asp-controller="Events" asp-action="Index">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-gold ms-3" asp-controller="Report" asp-action="ReportForm">Report & Request</a>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <body class="@ViewData["BodyClass"]">
+    <!-- Main content -->
+    <main>
         @RenderBody()
-    </body>
+    </main>
 
-    <div>
-        @RenderBody()
-    </div>
-    <body class="@ViewData["BodyClass"]">
-        @RenderBody()
-    </body>
-
+    <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+
+    <!-- Page-specific scripts -->
+    @RenderSection("Scripts", required: false)
+
 </body>
 </html>

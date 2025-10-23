@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using ST10026525.PROG3B.POE.Data;
+
 namespace ST10026525.PROG3B.POE
 {
     public class Program
@@ -10,7 +13,15 @@ namespace ST10026525.PROG3B.POE
             builder.Services.AddControllersWithViews()
             .AddDataAnnotationsLocalization()
             .AddViewLocalization();
+          
+
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("EventsDB")));
+          
             builder.Services.AddSession();
+
+            builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
 
             var app = builder.Build();
 
