@@ -17,8 +17,9 @@ The main goal of this application is to provide a **user-friendly platform for m
 - **Service Request Status** (Coming Soon)
   - View the progress and status of previously submitted requests.
 
-- **Local Events and Announcements** (Coming Soon)
+- **Local Events and Announcements**
   - Stay informed about local community events and municipal announcements.
+  - This feature has been implemented.
 
 ---
 
